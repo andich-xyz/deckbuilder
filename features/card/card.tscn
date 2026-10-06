@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://wqaa865pr85w"]
+
+[ext_resource type="Script" uid="uid://dqb5r6e25w2th" path="res://features/card/card.gd" id="1_21b56"]
+[ext_resource type="Script" uid="uid://dwmjv31f24m8m" path="res://features/card/card_state_machine.gd" id="2_4hiay"]
+[ext_resource type="Script" uid="uid://ve7sipop35em" path="res://features/card/states/card_base_state.gd" id="3_aeupa"]
+[ext_resource type="Script" uid="uid://dvirf2gq8sv72" path="res://features/card/states/card_clicked_state.gd" id="4_87y12"]
+[ext_resource type="Script" uid="uid://bq1uxv7ymakww" path="res://features/card/states/card_dragging_state.gd" id="5_d5eul"]
+[ext_resource type="Script" uid="uid://0hhepalq4xs1" path="res://features/card/states/card_aiming_state.gd" id="6_37voa"]
+[ext_resource type="Script" uid="uid://4i0lbmosj0ng" path="res://features/card/states/card_released_state.gd" id="7_750s8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7b7a"]
+size = Vector2(25, 30)
+
+[node name="Card" type="Control" unique_id=530549777]
+custom_minimum_size = Vector2(25, 30)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -231.0
+offset_bottom = -114.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_21b56")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1614806931]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.25, 0.054166675, 1)
+
+[node name="StateLabel" type="Label" parent="." unique_id=1484438535]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "state"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DropDetector" type="Area2D" parent="." unique_id=279081221]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropDetector" unique_id=230557732]
+position = Vector2(12.5, 15)
+shape = SubResource("RectangleShape2D_g7b7a")
+
+[node name="CardStateMachine" type="Node" parent="." unique_id=2052276253 node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("2_4hiay")
+initial_state = NodePath("CardBaseState")
+
+[node name="CardBaseState" type="Node" parent="CardStateMachine" unique_id=210707231]
+script = ExtResource("3_aeupa")
+
+[node name="CardClickedState" type="Node" parent="CardStateMachine" unique_id=356796883]
+script = ExtResource("4_87y12")
+state = 1
+
+[node name="CardDraggingState" type="Node" parent="CardStateMachine" unique_id=1284071407]
+script = ExtResource("5_d5eul")
+state = 2
+
+[node name="CardAimingState" type="Node" parent="CardStateMachine" unique_id=1588757761]
+script = ExtResource("6_37voa")
+state = 3
+
+[node name="CardReleasedState" type="Node" parent="CardStateMachine" unique_id=865295162]
+script = ExtResource("7_750s8")
+state = 4

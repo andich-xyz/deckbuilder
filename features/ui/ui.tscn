@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ub4512yv6p5v"]
+
+[ext_resource type="Script" uid="uid://byy74g54gib8g" path="res://features/ui/ui.gd" id="1_wug4t"]
+[ext_resource type="Script" uid="uid://bqjh7b1uhb61e" path="res://features/hand/hand.gd" id="2_e8elp"]
+[ext_resource type="PackedScene" uid="uid://wqaa865pr85w" path="res://features/card/card.tscn" id="3_ja4ly"]
+[ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="4_fxbex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7b7a"]
+
+[node name="UI" type="CanvasLayer" unique_id=351825159 groups=["ui_layer"]]
+script = ExtResource("1_wug4t")
+
+[node name="Hand" type="HBoxContainer" parent="." unique_id=975761499]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.5
+offset_top = -30.0
+offset_right = 41.5
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("2_e8elp")
+
+[node name="Card" parent="Hand" unique_id=530549777 instance=ExtResource("3_ja4ly")]
+layout_mode = 2
+
+[node name="Card2" parent="Hand" unique_id=1007563265 instance=ExtResource("3_ja4ly")]
+layout_mode = 2
+
+[node name="Card3" parent="Hand" unique_id=2031563190 instance=ExtResource("3_ja4ly")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="." unique_id=193028736]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="CancelButton" type="TouchScreenButton" parent="Control" unique_id=821064203]
+unique_name_in_owner = true
+position = Vector2(8, -21)
+texture_normal = ExtResource("4_fxbex")
+shape = SubResource("RectangleShape2D_g7b7a")
+action = "ui_cancel"
